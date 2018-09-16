@@ -1,0 +1,19 @@
+.mobile-container-column {
+    @media screen and (max-width: 600px) {
+        flex-direction: column;
+
+        > * {
+        flex-grow: 0;
+        flex-basis: auto;
+        }
+        
+      }
+}
+
+.mobile-container-mt-20 {
+    > *:not(:first-child) {
+        @media screen and (max-width: $mobile) {
+            margin-top: 20px;
+        }
+    } 
+}

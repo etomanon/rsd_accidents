@@ -1,0 +1,54 @@
+%flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wrapper {
+    width: $large;
+    margin: 0 auto;
+    overflow-x: hidden;
+    @media screen and (max-width: $large + 40px) {
+        width: auto;
+        margin: 0 20px;
+      }
+    @media screen and (max-width: $extra-small) {
+        margin: 0 0;
+      }
+}
+
+.container {
+    @extend %flex;
+}
+
+.container-column {
+    @extend %flex;
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.justify-around {
+    justify-content: space-around;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.equal-width > * {
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.gap-40 {
+    margin-right: -40px;
+    > * {
+        margin-right: 40px;
+    }
+}

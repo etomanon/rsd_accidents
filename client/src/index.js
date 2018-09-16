@@ -6,6 +6,7 @@ import { unregister } from './registerServiceWorker';
 
 import configureStore from "src/main/store";
 import Transition from 'src/main/transition';
+import "./styles/css/main.css"; // compiled sass
 
 
 const store = configureStore()

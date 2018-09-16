@@ -3,5 +3,6 @@
 
 /client/node_modules
 /client/build
+/client/src/styles/css/main.css
 
 sslcert

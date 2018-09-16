@@ -1,0 +1,37 @@
+.background-gradient {
+    background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+}
+
+.background-primary {
+    background: $primary;
+}
+
+.background-secondary {
+    background: $secondary;
+}
+
+.divider {
+    background: $light-grey;
+    height: 1px;
+    width: 100%;
+}
+
+.hover-negative {
+    background: #fff;
+    color: $primary;
+    border: 1px solid $primary;
+    transition: .5s ease-in-out all;
+
+    &:hover {
+        background: $primary;
+        color: #fff;
+    }
+}
+
+.border-primary {
+    border: 1px solid $primary;
+}
+
+.border-radius {
+    border-radius: 5px;
+}
