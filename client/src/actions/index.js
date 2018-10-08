@@ -1,20 +1,18 @@
 import axios from 'axios';
 
-export const USER_GET = 'USER_GET';
-export const AUTH_GET ='AUTH_GET';
+export const LAYER_REMOVE = 'LAYER_REMOVE';
+export const LAYER_ADD = 'LAYER_ADD';
 
-export function userGet() {
-    const request = axios.get('/api/profile');
+export function layerRemove(layer) {
     return {
-        type: USER_GET,
-        payload: request
+        type: LAYER_REMOVE,
+        payload: layer
     };
 }
 
-export function authGet() {
-    const request = axios.get('/api/auth/check');
+export function layerAdd(layer) {
     return {
-        type: AUTH_GET,
-        payload: request
+        type: LAYER_ADD,
+        payload: layer
     };
 }
