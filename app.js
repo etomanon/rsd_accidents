@@ -12,7 +12,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
+// app.use((req, res, next) => {
     // res.header('Access-Control-Allow-Origin', '*');
     // res.header('Access-Control-Allow-Credentials', true);
     // res.header('Access-Control-Allow-Headers', '*');
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     //     return res.status(200).json({});
     // }
     // next();
-})
+// })
 
 // Routes to handle requests
 app.use('/api/data', dataRoutes);

@@ -1,0 +1,71 @@
+.button {
+    background: $primary;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    transition: .5s ease-in-out all;
+    text-transform: uppercase;
+    border: 1px solid $primary;
+
+    &:hover {
+        background: #fff;
+        color: $primary;
+        border: 1px solid $primary;
+    }
+}
+
+.button-big {
+    @extend .button;
+    padding: 20px;
+}
+
+.button-inverse {
+    @extend .button;
+    background: #fff;
+    color: $primary;
+    border: 1px solid $primary;
+
+    &:hover {
+        background: $primary;
+        color: #fff;
+    }
+}
+
+.button-cancel-inverse {
+    @extend .button;
+    background: #fff;
+    color: $dark-grey;
+    border: 1px solid $dark-grey;
+
+    &:hover {
+        background: $dark-grey;
+        color: #fff;
+        border: 1px solid $dark-grey;
+    }
+}
+
+.button-cancel {
+    @extend .button;
+    background: $dark-grey;
+    color: #fff;
+    border: 1px solid $dark-grey;
+    
+    &:hover {
+        background: #fff;
+        color: $dark-grey;
+        border: 1px solid $dark-grey;    
+    }
+}
+
+.button--active {
+    background: $secondary;
+        color: #fff;
+        border: 1px solid $secondary;
+    
+
+    &:hover {
+        background: #fff;
+    color: $primary;
+    border: 1px solid $primary;
+    }
+}

@@ -1,18 +1,22 @@
 import axios from 'axios';
 
-export const LAYER_REMOVE = 'LAYER_REMOVE';
-export const LAYER_ADD = 'LAYER_ADD';
+export const LAYER_TOGGLE = 'LAYER_TOGGLE';
+export const LAYER_OPACITY = 'LAYER_OPACITY';
 
-export function layerRemove(layer) {
+export function layerToggle(layerId) {
     return {
-        type: LAYER_REMOVE,
-        payload: layer
+        type: LAYER_TOGGLE,
+        payload: layerId
     };
 }
 
-export function layerAdd(layer) {
+
+export function layerOpacity(layerId, opacity) {
     return {
-        type: LAYER_ADD,
-        payload: layer
+        type: LAYER_OPACITY,
+        payload: {
+            id: layerId,
+            opacity
+        }
     };
 }

@@ -1,0 +1,29 @@
+import React, { Component } from "react";
+import Slider from '@material-ui/lab/Slider';
+
+class LayerSlider extends Component {
+    constructor() {
+        super();
+        this.state = {
+            value: 1
+        }
+    }
+    onChange = (event, value) => {
+        this.setState({ value });
+        this.props.onOpacity(this.props.layerId, value);
+    };
+
+    render() {
+        return (
+            <Slider
+                title="Průhlednost"
+                max={1}
+                value={this.state.value}
+                onChange={this.onChange}
+            />
+        );
+
+    }
+}
+
+export default LayerSlider;

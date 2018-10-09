@@ -4,15 +4,22 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
     palette: {
         primary: {
-            light: "#193c83",
-            main: "#002776",
-            dark: "#00236a",
+            light: "#3F51B5",
+            main: "#303F9F",
+            dark: "#1A237E",
         },
         secondary: {
-            light: "#1ab753",
-            main: "#01af40",
-            dark: "#009d39",
+            light: "#4CAF50",
+            main: "#388E3C",
+            dark: "#1B5E20",
         },
+    },
+    overrides: {
+        MuiSlider: {
+            track: {
+                height: '5px',
+            },
+        }
     },
 });
 

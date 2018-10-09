@@ -52,3 +52,9 @@
         margin-right: 40px;
     }
 }
+
+.list-mt-20 {
+    > *:not(:first-child) {
+            margin-top: 20px;
+    } 
+}

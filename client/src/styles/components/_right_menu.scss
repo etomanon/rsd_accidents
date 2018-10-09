@@ -1,0 +1,28 @@
+.right-menu {
+    @extend .translate;
+    height: 100%;
+    width: 320px;
+    background: #fff;
+    overflow: visible;
+}
+
+.right-menu--active {
+    transform: translate3d(0, 0, 0);
+}
+
+.right-menu__icon {
+    position: absolute;
+    transform: translate3d(-100%, 0, 0);
+}
+
+.right-menu__submenu {
+    @extend .translate;
+    transition: .5s ease-in-out transform, .5s ease-in-out opacity;
+    opacity: 0;
+    width: 100%;
+    overflow: visible;
+}
+.right-menu__submenu--active {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+}

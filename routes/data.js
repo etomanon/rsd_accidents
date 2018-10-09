@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const db = require('../db/db')
 const tiles = require('../db/tiles')
@@ -27,7 +27,6 @@ router.get("/weekday/:z/:x/:y", (req, res) => {
 
 router.get("/weekend/:z/:x/:y", (req, res) => {
     let { x, y, z } = req.params;
-    // https://github.com/mapbox/tippecanoe
     if (tiles.weekend !== undefined) {
         tiles.weekend.getTile(z, x, y, function (err, data, headers) {
             if (err) {
