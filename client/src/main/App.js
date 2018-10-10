@@ -20,7 +20,7 @@ class App extends Component {
         <MaterialTheme>
           <TransitionGroup>
             <PageFade key={this.props.location.pathname}>
-              <div className="text-center">
+              <div>
                 <ScrollTop>
                   <Switch location={this.props.location}>
                     <Route exact path='/' component={Home} />

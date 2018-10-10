@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const LAYER_TOGGLE = 'LAYER_TOGGLE';
 export const LAYER_OPACITY = 'LAYER_OPACITY';
+export const HOUR_SET = 'HOUR_SET';
 
 export function layerToggle(layerId) {
     return {
@@ -19,4 +20,11 @@ export function layerOpacity(layerId, opacity) {
             opacity
         }
     };
+}
+
+export function hourSet(hour) {
+    return {
+        type: HOUR_SET,
+        payload: hour
+    }
 }

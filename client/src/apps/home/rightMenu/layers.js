@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { layerToggle, layerOpacity } from "src/actions/index";
 import Button from '@material-ui/core/Button';
 
 import LayerSlider from "./layerSlider";
 
-class Layers extends Component {
+export default class Layers extends Component {
     render() {
         return (
             <div>
@@ -38,15 +35,3 @@ class Layers extends Component {
         );
     }
 }
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ layerToggle, layerOpacity }, dispatch);
-}
-
-const mapStateToProps = (state) => {
-    return {
-        layers: state.map.layers
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Layers);

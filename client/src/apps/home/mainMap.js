@@ -19,10 +19,10 @@ export default class MainMap extends Component {
       })
     });
     Layers.defaultLayers(this.mapEl);
-    Layers.update(this.mapEl, this.props.map.layers);
+    Layers.update(this.mapEl, this.props.map);
   }
   componentDidUpdate(prevProps) {
-    Layers.update(this.mapEl, this.props.map.layers);
+    Layers.update(this.mapEl, this.props.map);
   }
   render() {
     return (

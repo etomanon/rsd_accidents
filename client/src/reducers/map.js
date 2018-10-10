@@ -1,4 +1,4 @@
-import { LAYER_TOGGLE, LAYER_OPACITY } from '../actions';
+import { LAYER_TOGGLE, LAYER_OPACITY, HOUR_SET } from '../actions';
 
 export default function (state = {
     layers: [{
@@ -28,7 +28,8 @@ export default function (state = {
         opacity: 1,
         show: true,
         zIndex: 4
-    }]
+    }],
+    hour: -1
 }, action) {
     switch (action.type) {
         case LAYER_TOGGLE:
@@ -52,6 +53,11 @@ export default function (state = {
                     }
                     return layer
                 })
+            }
+        case HOUR_SET:
+            return {
+                ...state,
+                hour: action.payload
             }
         default:
             return state;

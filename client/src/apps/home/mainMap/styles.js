@@ -4,9 +4,15 @@ import Stroke from "ol/style/Stroke";
 export default new class Styles {
     constructor() {
         this.important = ["motorway", "motorway_link", "primary", "primary_link", "trunk", "trunk_link"];
+        this.hour = -1;
+        this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
+    }
+    updateStyle = (hour) => {
+        this.hour = hour;
+        this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
     }
     vectorTile = (feature, resolution) => {
-        if (feature.get("points_total") === 0) {
+        if (feature.get(this.points) === 0) {
             return new Style({
                 stroke: new Stroke({
                     color: "rgba(0, 255, 0, 0)",

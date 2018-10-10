@@ -10,9 +10,14 @@
     transform: translate3d(0, 0, 0);
 }
 
-.right-menu__icon {
+.right-menu__options {
     position: absolute;
     transform: translate3d(-100%, 0, 0);
+}
+
+.right-menu__icon {
+    // position: absolute;
+    // transform: translate3d(-100%, 0, 0);
 }
 
 .right-menu__submenu {

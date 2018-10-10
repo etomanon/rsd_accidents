@@ -58,7 +58,8 @@ export default new class Layers {
         })
     }
 
-    update = (map, newLayers) => {
+    update = (map, stateMap) => {
+        const newLayers = stateMap.layers;
         this.defaultLayers.forEach(layer => {
             newLayers.forEach(newLayer => {
                 if (layer.get("id") === newLayer.id) {
@@ -73,6 +74,11 @@ export default new class Layers {
                     layer.setOpacity(newLayer.opacity);
                 }
             })
+        })
+
+        Styles.updateStyle(stateMap.hour);
+        this.defaultLayers.forEach(layer => {
+            layer.changed()
         })
     }
 }();

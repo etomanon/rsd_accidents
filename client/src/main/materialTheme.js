@@ -17,8 +17,12 @@ const theme = createMuiTheme({
     overrides: {
         MuiSlider: {
             track: {
-                height: '5px',
+                height: "5px",
             },
+            activated: {
+                    background: "#388E3C",
+                    boxShadow: "none !important",
+            }
         }
     },
 });
