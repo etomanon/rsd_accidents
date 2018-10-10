@@ -17,9 +17,13 @@ export default class Menu extends Component {
     render() {
         return (
             <div className="mt-20 p-20 container-column">
-                <div className="text-left mb-20 text-center">Hodina: {this.state.value}:00 - {this.state.value + 1}:00</div>
+                <div className="text-left mb-20 text-center">
+                Hodina: {!(this.state.value === -1) ? 
+                `${this.state.value}:00 - ${this.state.value + 1}:00`
+                :
+                "Celý den"}
+                </div>
                 <Slider
-                    title="Hodina"
                     min={-1}
                     max={23}
                     step={1}

@@ -16,7 +16,6 @@ class LayerSlider extends Component {
     render() {
         return (
             <Slider
-                title="Průhlednost"
                 max={1}
                 value={this.state.value}
                 onChange={this.onChange}

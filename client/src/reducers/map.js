@@ -19,7 +19,7 @@ export default function (state = {
         id: "weekend",
         name: "Víkend",
         opacity: 1,
-        show: true,
+        show: false,
         zIndex: 3
     },
     {

@@ -17,7 +17,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiSlider: {
             track: {
-                height: "5px",
+                height: "6px",
             },
             activated: {
                     background: "#388E3C",
