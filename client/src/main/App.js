@@ -11,8 +11,6 @@ import Error404 from 'src/apps/error404';
 import ScrollTop from 'src/components/scrollTop';
 import PageFade from 'src/components/pageFade';
 
-import './App.css';
-
 class App extends Component {
   render() {
     return (

@@ -9,7 +9,7 @@ import Transition from 'src/main/transition';
 import "./styles/css/main.css"; // compiled sass
 
 
-const store = configureStore()
+export const store = configureStore();
 
 
 ReactDOM.render(<Provider store={store}>

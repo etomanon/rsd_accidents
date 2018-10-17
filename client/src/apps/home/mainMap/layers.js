@@ -4,6 +4,7 @@ import OSM from "ol/source/OSM";
 import VectorTile from "ol/layer/VectorTile"
 import VectorTileSource from "ol/source/VectorTile"
 import MVT from "ol/format/MVT";
+// import Feature from 'ol/Feature';
 
 import Styles from "./styles";
 
@@ -14,7 +15,10 @@ export default new class Layers {
     createVectorTile = (title, url, style, zIndex) => {
         return new VectorTile({
             source: new VectorTileSource({
-                format: new MVT(),
+                format: new MVT({
+                    // enable access to geometry
+                    // featureClass: Feature
+                }),
                 url: url,
             }),
             style: style,
