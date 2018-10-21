@@ -28,7 +28,8 @@ export default function (state = {
         opacity: 1,
         show: true,
         zIndex: 4
-    }],
+    }
+    ],
     hour: -1,
     resolution: 0
 }, action) {

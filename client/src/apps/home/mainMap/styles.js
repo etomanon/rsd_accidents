@@ -4,7 +4,6 @@ import LineString from 'ol/geom/LineString';
 
 export default new class Styles {
     constructor() {
-        // this.motorway = ["motorway", "motorway_link"];
         this.important = ["motorway", "motorway_link", "primary", "primary_link", "trunk", "trunk_link"];
         this.hour = -1;
         this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
@@ -35,31 +34,37 @@ export default new class Styles {
 
         return new LineString(coords);
     }
-    vectorTile = (feature, resolution) => {
+    vectorTileOffset = (feature, resolution) => {
         const points = feature.get(this.points);
         const highway = feature.get("highway");
-        // const length = feature.getGeometry().getLength();
-        // let geometry = feature.getGeometry();
-        // if(this.motorway.indexOf(highway) !== -1 && points !== 0) {
-        //     geometry = this.offsetLine(feature, resolution);
-        // }
+        let geometry = feature.getGeometry();
+        if (points !== 0) {
+            geometry = this.offsetLine(feature, resolution);
+        }
         return new Style({
-            // geometry: geometry,
+            geometry: geometry,
             stroke: new Stroke({
-                // color: "rgba(0, 255, 0, 1)",
                 color: this.color(points, highway, resolution),
                 lineCap: "square",
                 width: this.getWidth(feature, resolution)
             })
         })
     }
+    vectorTile = (feature, resolution) => {
+        const points = feature.get(this.points);
+        const highway = feature.get("highway");
+        return new Style({
+            stroke: new Stroke({
+                color: this.color(points, highway, resolution, true),
+                lineCap: "square",
+                width: this.getWidth(feature, resolution)
+            })
+        })
+    }
     // resolution 20, 150
-    color = (points, highway, resolution) => {
+    color = (points, highway, resolution, limit) => {
         if (points === 0) {
             // return "#84CA50";
-            return "rgba(0, 0, 0, 0)";
-        }
-        if (resolution > 20) {
             return "rgba(0, 0, 0, 0)";
         }
         if (points <= 3) {

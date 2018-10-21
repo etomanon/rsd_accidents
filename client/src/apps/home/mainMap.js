@@ -23,17 +23,18 @@ export default class MainMap extends Component {
       target: this.map,
       view: new View({
         center: fromLonLat([16.6068, 49.1951]),
-        zoom: 14,
+        zoom: 15,
         projection: "EPSG:3857"
       })
     });
     Layers.defaultLayers(this.mapEl);
-    Events.init(this.mapEl);
+    Events.init(this.mapEl, this.props.map);
 
     Layers.update(this.mapEl, this.props.map);
   }
   componentDidUpdate(prevProps) {
     Layers.update(this.mapEl, this.props.map);
+    Events.update(this.props.map);
   }
   render() {
     return (
