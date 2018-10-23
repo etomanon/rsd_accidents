@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 
 export const LAYER_TOGGLE = 'LAYER_TOGGLE';
 export const LAYER_OPACITY = 'LAYER_OPACITY';
@@ -24,6 +24,13 @@ export function layerOpacity(layerId, opacity) {
 }
 
 export function hourSet(hour) {
+    axios.get("/api/stat/weekday/30/-1")
+    .then(data => {
+        console.log(data)
+    })
+    .catch(err => {
+        console.log(err)
+    })
     return {
         type: HOUR_SET,
         payload: hour

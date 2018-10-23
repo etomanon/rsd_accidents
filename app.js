@@ -7,6 +7,7 @@ const path = require('path');
 
 // import Routes
 const dataRoutes = require('./routes/data');
+const statRoutes = require('./routes/stat');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,6 +27,7 @@ app.use(bodyParser.json());
 
 // Routes to handle requests
 app.use('/api/data', dataRoutes);
+app.use('/api/stat', statRoutes);
 
 if (process.env.NODE_ENV === 'production') {
     // Serve any static files
