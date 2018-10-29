@@ -30,8 +30,8 @@ export default new class Layers {
             minResolution,
             style: style,
             zIndex: zIndex,
-            // id: title,
             name: title,
+            id: title,
             show: true
         })
     }
@@ -56,16 +56,16 @@ export default new class Layers {
                 show: true,
                 layers: [
                     this.createVectorTile(
-                        'weekday30',
+                        'result_weekday30',
                         'api/data/weekday/{z}/{x}/{y}',
                         Styles.vectorTile,
                         3,
                         false,
-                        8,
+                        10,
                         undefined
                     ),
                     this.createVectorTile(
-                        'weekday2000',
+                        'result_weekday2000',
                         'api/data/weekday2000/{z}/{x}/{y}',
                         Styles.vectorTileOffset,
                         3,
@@ -74,7 +74,7 @@ export default new class Layers {
                         undefined,
                     ),
                     this.createVectorTile(
-                        'weekday10000',
+                        'result_weekday10000',
                         'api/data/weekday10000/{z}/{x}/{y}',
                         Styles.vectorTileOffset,
                         3,
@@ -89,16 +89,16 @@ export default new class Layers {
                 show: true,
                 layers: [
                     this.createVectorTile(
-                        'weekend30',
+                        'result_weekend30',
                         'api/data/weekend/{z}/{x}/{y}',
                         Styles.vectorTile,
                         4,
                         false,
-                        8,
+                        10,
                         undefined
                     ),
                     this.createVectorTile(
-                        'weekend2000',
+                        'result_weekend2000',
                         'api/data/weekend2000/{z}/{x}/{y}',
                         Styles.vectorTileOffset,
                         4,
@@ -107,7 +107,7 @@ export default new class Layers {
                         undefined
                     ),
                     this.createVectorTile(
-                        'weekend10000',
+                        'result_weekend10000',
                         'api/data/weekend10000/{z}/{x}/{y}',
                         Styles.vectorTileOffset,
                         4,
@@ -143,14 +143,16 @@ export default new class Layers {
             })
         })
 
-        Styles.updateStyle(stateMap.hour);
+        const layersAll = [];
         this.defaultLayers.forEach(layer => {
-            layer.changed();
             if (layer instanceof LayerGroup) {
                 layer.getLayers().forEach((sublayer) => {
-                    sublayer.changed();
+                    layersAll.push(sublayer);
                 });
+                return;
             }
+            layersAll.push(layer);
         })
+        Styles.updateStyle(stateMap, layersAll);
     }
 }();

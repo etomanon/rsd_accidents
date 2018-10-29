@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { layerToggle, layerOpacity, hourSet } from "src/actions/index";
+import { layerToggle, layerOpacity, hourSet, legendGet } from "src/actions/index";
 import { valuesIn, keysIn } from "lodash";
 
 import Layers from "./rightMenu/layers";
@@ -16,6 +16,9 @@ class RightMenu extends Component {
             layers: false,
             menu: false
         }
+    }
+    componentDidMount() {
+        this.props.legendGet();
     }
     onToggle = (key) => {
         keysIn(this.state).forEach(key => {
@@ -71,7 +74,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ layerToggle, layerOpacity, hourSet }, dispatch)
+    return bindActionCreators({ layerToggle, layerOpacity, hourSet, legendGet }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);

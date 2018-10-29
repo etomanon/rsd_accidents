@@ -6,18 +6,23 @@ const db = require('../db/db');
 const util = require('../helpers/util');
 
 
-router.get("/:weekpart/:segmentLength/:hour", (req, res) => {
-    const { weekpart, segmentLength, hour } = req.params;
-    const points = hour === "-1" ? 'points_total' : 'points_' + hour;
-    const range = util.getRange(`result_${weekpart}`, points, `${segmentLength}`);
-    return range
-    .then(value => {
-        return res.send(value);
+router.get("/", (req, res) => {
+    const ranges = [];
+    [-1, 0].forEach(hour => {
+        ["result_weekday", "result_weekend"].forEach(table => {
+            [30, 2000, 10000].forEach(val => {
+                ranges.push(util.getRange(table, hour, val));
+            });
+        })
     })
-    .catch(err => {
-        return res.send(err);
-    })
-    
+
+    return Promise.all(ranges)
+        .then(values => {
+            return res.send(values);
+        })
+        .catch(err => {
+            return res.send(err);
+        })
 })
 
 
@@ -34,4 +39,3 @@ module.exports = router;
     //   ) AS feature
     //   FROM (SELECT * FROM roads_accidents) inputs) features;
     //   `
-    

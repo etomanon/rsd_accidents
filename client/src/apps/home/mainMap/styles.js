@@ -7,10 +7,38 @@ export default new class Styles {
         this.important = ["motorway", "motorway_link", "primary", "primary_link", "trunk", "trunk_link"];
         this.hour = -1;
         this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
+        this.legends = [];
     }
-    updateStyle = (hour) => {
-        this.hour = hour;
-        this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
+    updateStyle = (stateMap, layersAll) => {
+        
+
+        if (this.hour !== stateMap.hour ||
+            this.legends.length !== stateMap.legend.length) {
+            this.legends = stateMap.legend;
+            this.hour = stateMap.hour;
+            this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
+            const hourLegend = (stateMap.hour === -1) ? -1 : 0;
+
+            layersAll.forEach(layer => {
+                this.legends.forEach(legend => {
+                    if (layer.get("id") === legend.table && legend.hour === hourLegend) {
+                        if (legend.length === 30) {
+                            layer.setStyle((feature, resolution) => {
+                                return this.vectorTile(feature, resolution, legend.ranges);
+                            })
+                        }
+                        else {
+                            layer.setStyle((feature, resolution) => {
+                                return this.vectorTileOffset(feature, resolution, legend.ranges);
+                            })
+                        }
+                    }
+                })
+                layer.changed();
+            })
+        }
+
+
     }
     offsetLine = (feature, resolution) => {
         let line = feature.getGeometry();
@@ -34,9 +62,8 @@ export default new class Styles {
 
         return new LineString(coords);
     }
-    vectorTileOffset = (feature, resolution) => {
+    vectorTileOffset = (feature, resolution, ranges) => {
         const points = feature.get(this.points);
-        const highway = feature.get("highway");
         let geometry = feature.getGeometry();
         if (points !== 0) {
             geometry = this.offsetLine(feature, resolution);
@@ -44,40 +71,39 @@ export default new class Styles {
         return new Style({
             geometry: geometry,
             stroke: new Stroke({
-                color: this.color(points, highway, resolution),
+                color: this.color(points, ranges),
                 lineCap: "square",
-                width: this.getWidth(feature, resolution)
+                width: this.getWidth(resolution)
             })
         })
     }
-    vectorTile = (feature, resolution) => {
+    vectorTile = (feature, resolution, ranges) => {
         const points = feature.get(this.points);
-        const highway = feature.get("highway");
         return new Style({
             stroke: new Stroke({
-                color: this.color(points, highway, resolution, true),
+                color: this.color(points, ranges),
                 lineCap: "square",
-                width: this.getWidth(feature, resolution)
+                width: this.getWidth(resolution)
             })
         })
     }
-    // resolution 20, 150
-    color = (points, highway, resolution, limit) => {
-        if (points === 0) {
-            // return "#84CA50";
-            return "rgba(0, 0, 0, 0)";
+    color = (points, ranges) => {
+        if (ranges) {
+            if (points === 0) {
+                return "rgba(0, 0, 0, 0)";
+            }
+            if (points <= ranges[1]) {
+                return "#eeee00";
+            }
+            if (points <= ranges[2]) {
+                return "#F07D02";
+            }
+            return "#ff0000";
         }
-        if (points <= 3) {
-            return "#eeee00"
-            // return "rgba(0, 0, 0, 0)";
-        }
-        if (points <= 9) {
-            return "#F07D02";
-        }
-        return "#ff0000"
+        return "rgba(0, 0, 0, 0)";
     }
 
-    getWidth = (feature, resolution) => {
+    getWidth = (resolution) => {
         if (resolution > 9) {
             return 2;
         }

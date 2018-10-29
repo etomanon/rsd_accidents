@@ -1,4 +1,4 @@
-import { LAYER_TOGGLE, LAYER_OPACITY, HOUR_SET, RESOLUTION_SET } from '../actions';
+import { LAYER_TOGGLE, LAYER_OPACITY, HOUR_SET, RESOLUTION_SET, LEGEND_GET } from '../actions';
 
 export default function (state = {
     layers: [{
@@ -31,7 +31,8 @@ export default function (state = {
     }
     ],
     hour: -1,
-    resolution: 0
+    resolution: 0,
+    legend: []
 }, action) {
     switch (action.type) {
         case LAYER_TOGGLE:
@@ -65,6 +66,11 @@ export default function (state = {
             return {
                 ...state,
                 resolution: action.payload
+            }
+        case LEGEND_GET + "_FULFILLED":
+            return {
+                ...state,
+                legend: action.payload.data
             }
         default:
             return state;

@@ -4,6 +4,7 @@ export const LAYER_TOGGLE = 'LAYER_TOGGLE';
 export const LAYER_OPACITY = 'LAYER_OPACITY';
 export const HOUR_SET = 'HOUR_SET';
 export const RESOLUTION_SET = 'RESOLUTION_SET';
+export const LEGEND_GET = 'LEGEND_GET';
 
 export function layerToggle(layerId) {
     return {
@@ -24,13 +25,6 @@ export function layerOpacity(layerId, opacity) {
 }
 
 export function hourSet(hour) {
-    axios.get("/api/stat/weekday/30/-1")
-    .then(data => {
-        console.log(data)
-    })
-    .catch(err => {
-        console.log(err)
-    })
     return {
         type: HOUR_SET,
         payload: hour
@@ -41,5 +35,13 @@ export function resolutionSet(resolution) {
     return {
         type: RESOLUTION_SET,
         payload: resolution
+    }
+}
+
+export function legendGet() {
+    const request = axios.get(`/api/stat/`)
+    return {
+        type: LEGEND_GET,
+        payload: request
     }
 }
