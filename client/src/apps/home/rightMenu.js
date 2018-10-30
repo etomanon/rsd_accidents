@@ -56,7 +56,9 @@ class RightMenu extends Component {
                 <div
                     className={`right-menu__submenu ${this.state.menu && "right-menu__submenu--active"}`}>
                     <Menu
+                        hour={this.props.map.hour}
                         hourSet={this.props.hourSet}
+                        legend={this.props.map.legend}
                     />
                 </div>
             </div>

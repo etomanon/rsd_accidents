@@ -25,7 +25,8 @@
     transition: .5s ease-in-out transform, .5s ease-in-out opacity;
     opacity: 0;
     width: 100%;
-    overflow: visible;
+    overflow: auto;
+    height: 100%;
 }
 .right-menu__submenu--active {
     transform: translate3d(0, 0, 0);

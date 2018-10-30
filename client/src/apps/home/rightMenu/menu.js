@@ -18,10 +18,10 @@ export default class Menu extends Component {
         return (
             <div className="mt-20 p-20 container-column">
                 <div className="text-left mb-20 text-center">
-                Hodina: {!(this.state.value === -1) ? 
-                `${this.state.value}:00 - ${this.state.value + 1}:00`
-                :
-                "Celý den"}
+                    Hodina: {!(this.state.value === -1) ?
+                        `${this.state.value}:00 - ${this.state.value + 1}:00`
+                        :
+                        "Celý den"}
                 </div>
                 <Slider
                     min={-1}
@@ -30,6 +30,20 @@ export default class Menu extends Component {
                     value={this.state.value}
                     onChange={this.onChange}
                 />
+                <div className="mt-20">
+                    {this.props.legend.map((legend, i) => {
+                        return (
+                            <div className="mt-10" key={i}>
+                                <div>{legend.table}</div>
+                                <div>{`${legend.hour === -1 ? "Celý den" : "1 hodina"}`}</div>
+                                <div>{legend.ranges.slice(1).join(" - ")}</div>
+                                <div>{legend.countFeatures.join(" | ")}</div>
+                            </div>
+                        );
+                    })
+                    }
+
+                </div>
             </div>
         );
 

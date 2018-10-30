@@ -40,8 +40,8 @@ export default new class Styles {
 
 
     }
-    offsetLine = (feature, resolution) => {
-        let line = feature.getGeometry();
+    offsetLine = (geometry, resolution) => {
+        let line = geometry;
         let coords = [];
         line.forEachSegment((from, to) => {
             // for each segment calculate a parallel segment with a
@@ -66,7 +66,8 @@ export default new class Styles {
         const points = feature.get(this.points);
         let geometry = feature.getGeometry();
         if (points !== 0) {
-            geometry = this.offsetLine(feature, resolution);
+            if(geometry.getLength() > 2001) geometry = geometry.simplify(11000);
+            geometry = this.offsetLine(geometry, resolution);
         }
         return new Style({
             geometry: geometry,

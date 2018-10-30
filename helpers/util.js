@@ -54,11 +54,13 @@ const util = {
                     }
                     let geo = new geostats(filtered);
                     geo.getClassJenks(3);
+                    geo.doCount();
                     resolve({
                         table: table + segmentLength,
                         length: segmentLength,
                         hour: hour,
-                        ranges: geo.bounds
+                        ranges: geo.bounds,
+                        countFeatures: geo.counter
                     });
                 })
                 .catch((err) => {
