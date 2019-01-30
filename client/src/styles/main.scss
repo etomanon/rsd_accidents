@@ -1,5 +1,4 @@
-@import "vendors/normalize";
-
+@import "base/reset";
 @import "base/variables";
 @import "base/typography";
 @import "base/layout";
@@ -10,5 +9,6 @@
 @import "components/button";
 @import "components/main_map";
 @import "components/right_menu";
+@import "components/pie-chart";
 
 @import "base/mobile";

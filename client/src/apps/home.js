@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
+import { modalToggle } from "src/actions/index";
+
 
 import MainMap from "./home/mainMap";
 import RightMenu from "./home/rightMenu";
+import ChartModal from "./home/charts/chartModal";
 
 class Home extends Component {
     render() {
@@ -14,6 +17,11 @@ class Home extends Component {
                     map={this.props.map}
                 />
                 <RightMenu />
+                <ChartModal
+                    showModal={this.props.map.showModal}
+                    modalToggle={this.props.modalToggle}
+                    chart={this.props.map.chart}
+                />
             </div>
         )
     }
@@ -25,4 +33,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = {
+    modalToggle
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

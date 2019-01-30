@@ -1,5 +1,5 @@
 import { store } from "src/index";
-import { resolutionSet } from "src/actions/index";
+import { resolutionSet, extentSet } from "src/actions/index";
 import Overlay from 'ol/Overlay.js';
 import { getCenter } from "ol/extent";
 
@@ -29,11 +29,14 @@ export default new class Events {
     }
     onMoveEnd = (e) => {
         const map = e.map;
-        const resolution = map.getView().getResolution();
+        const view = map.getView();
+        const resolution = view.getResolution();
+        const extent = view.calculateExtent();
         if (resolution !== this.resolution) {
             this.resolution = resolution;
             store.dispatch(resolutionSet(resolution));
         }
+        store.dispatch(extentSet(extent));
     }
 
     onClick = (e) => {
@@ -59,7 +62,7 @@ export default new class Events {
         const target = map.getTarget();
         const features = map.getFeaturesAtPixel(e.pixel);
         if (!features) {
-            if(target.classList.contains("pointer")) target.classList.remove("pointer");
+            if (target.classList.contains("pointer")) target.classList.remove("pointer");
             return;
         }
         target.classList.add("pointer")

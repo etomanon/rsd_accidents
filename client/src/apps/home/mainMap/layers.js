@@ -1,7 +1,7 @@
 import TileLayer from "ol/layer/Tile.js";
 import XYZ from "ol/source/XYZ.js";
 import OSM from "ol/source/OSM";
-import VectorTile from "ol/layer/VectorTile"
+import VectorTile from "ol/layer/VectorTile";
 import VectorTileSource from "ol/source/VectorTile"
 import { Group as LayerGroup } from 'ol/layer.js';
 import MVT from "ol/format/MVT";

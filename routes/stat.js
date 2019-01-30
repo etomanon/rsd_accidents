@@ -4,6 +4,7 @@ const router = express.Router();
 
 const db = require('../db/db');
 const util = require('../helpers/util');
+const graphs = require('../helpers/graphs');
 
 
 router.get("/", (req, res) => {
@@ -23,6 +24,11 @@ router.get("/", (req, res) => {
         .catch(err => {
             return res.send(err);
         })
+})
+
+router.post("/graphs", (req, res) => {
+    const data = graphs.get(req.body.bbox);
+    data.then(data => res.send(data));
 })
 
 

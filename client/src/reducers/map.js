@@ -1,4 +1,7 @@
-import { LAYER_TOGGLE, LAYER_OPACITY, HOUR_SET, RESOLUTION_SET, LEGEND_GET } from '../actions';
+import {
+    LAYER_TOGGLE, LAYER_OPACITY, HOUR_SET, RESOLUTION_SET, LEGEND_GET,
+    MODAL_TOGGLE, EXTENT_SET, CHART_GET
+} from '../actions';
 
 export default function (state = {
     layers: [{
@@ -32,7 +35,15 @@ export default function (state = {
     ],
     hour: -1,
     resolution: 0,
-    legend: []
+    extent: {
+        0: 0,
+        1: 0,
+        2: 0,
+        3: 0
+    },
+    legend: [],
+    chart: [],
+    showModal: false
 }, action) {
     switch (action.type) {
         case LAYER_TOGGLE:
@@ -67,10 +78,25 @@ export default function (state = {
                 ...state,
                 resolution: action.payload
             }
+        case EXTENT_SET:
+            return {
+                ...state,
+                extent: action.payload
+            }
         case LEGEND_GET + "_FULFILLED":
             return {
                 ...state,
                 legend: action.payload.data
+            }
+        case CHART_GET + "_FULFILLED":
+            return {
+                ...state,
+                chart: action.payload.data
+            }
+        case MODAL_TOGGLE:
+            return {
+                ...state,
+                showModal: !state.showModal
             }
         default:
             return state;

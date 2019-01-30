@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Slider from '@material-ui/lab/Slider';
+import Button from '@material-ui/core/Button';
 
 export default class Menu extends Component {
     constructor() {
@@ -30,6 +31,18 @@ export default class Menu extends Component {
                     value={this.state.value}
                     onChange={this.onChange}
                 />
+                <div className="mt-20 text-center">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={e => {
+                            this.props.chartGet(this.props.extent);
+                            this.props.modalToggle();
+                        }}
+                    >
+                        Získej grafy
+                </Button>
+                </div>
                 <div className="mt-20">
                     {this.props.legend.map((legend, i) => {
                         return (
@@ -42,7 +55,6 @@ export default class Menu extends Component {
                         );
                     })
                     }
-
                 </div>
             </div>
         );

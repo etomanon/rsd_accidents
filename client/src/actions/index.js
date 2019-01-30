@@ -4,7 +4,10 @@ export const LAYER_TOGGLE = 'LAYER_TOGGLE';
 export const LAYER_OPACITY = 'LAYER_OPACITY';
 export const HOUR_SET = 'HOUR_SET';
 export const RESOLUTION_SET = 'RESOLUTION_SET';
+export const EXTENT_SET = 'EXTENT_SET';
 export const LEGEND_GET = 'LEGEND_GET';
+export const CHART_GET = 'CHART_GET';
+export const MODAL_TOGGLE = 'MODAL_TOGGLE';
 
 export function layerToggle(layerId) {
     return {
@@ -38,10 +41,31 @@ export function resolutionSet(resolution) {
     }
 }
 
+export function extentSet(extent) {
+    return {
+        type: EXTENT_SET,
+        payload: extent
+    }
+}
+
 export function legendGet() {
     const request = axios.get(`/api/stat/`)
     return {
         type: LEGEND_GET,
         payload: request
+    }
+}
+
+export function chartGet(bbox) {
+    const request = axios.post(`/api/stat/graphs`, { bbox })
+    return {
+        type: CHART_GET,
+        payload: request
+    }
+}
+
+export function modalToggle() {
+    return {
+        type: MODAL_TOGGLE
     }
 }
