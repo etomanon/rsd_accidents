@@ -2,12 +2,14 @@
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin-right: -1rem;
   margin-bottom: 1rem;
+  margin: auto;
+  margin-right: -1rem;
+  justify-content: center;
+  line-height: 1.5;
 
   &__item {
     margin-right: 1rem;
-    flex-basis: calc(50% - 1rem);
   }
 
   &__color {

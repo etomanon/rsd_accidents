@@ -8,8 +8,8 @@ const renderLegend = (props) => {
   const { title, payload } = props;
   return (
     <>
-      <div className="mb-10 text-center">{title}</div>
-      <div className="mb-10 text-center small">Typ (počet nehod | podíl délky typu komunikace na celku)</div>
+      <div className="mb-10 text-center bold">{title}</div>
+      <div className="mb-10 text-center small">Typ (počet nehod | podíl délky typu komunikace na celkové délce komunikací)</div>
       <ul className="pie-chart">
         {
           payload
@@ -30,8 +30,8 @@ class PieGraph extends React.Component {
     const { data, title } = this.props;
     return (
       <PieChart
-        width={500}
-        height={500}
+        width={1000}
+        height={600}
       >
         <Legend
           verticalAlign="top"

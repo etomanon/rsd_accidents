@@ -40,7 +40,7 @@ export default class Menu extends Component {
                             this.props.modalToggle();
                         }}
                     >
-                        Získej grafy
+                        Zobraz grafy pro oblast
                 </Button>
                 </div>
                 <div className="mt-20">

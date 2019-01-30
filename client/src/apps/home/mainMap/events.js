@@ -46,11 +46,13 @@ export default new class Events {
         if (!features) return;
         const feature = features[0];
         const properties = feature.getProperties();
+        console.log(properties)
         const point = this.points === -1 ? "total" : this.points;
         this.markerEl.innerHTML = `
         <div class="container-column align-center">
             <div class='mb-10 bold'>Počet nehod</div>
-            <div>${properties["points_" + point]}</div>
+            <div class="mb-10">${properties["points_" + point]}</div>
+            <div>Typ: ${properties.highway}</div>
         </div>
         `;
         const pos = getCenter(feature.getGeometry().getExtent());
