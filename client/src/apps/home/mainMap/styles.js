@@ -10,8 +10,6 @@ export default new class Styles {
         this.legends = [];
     }
     updateStyle = (stateMap, layersAll) => {
-        
-
         if (this.hour !== stateMap.hour ||
             this.legends.length !== stateMap.legend.length) {
             this.legends = stateMap.legend;

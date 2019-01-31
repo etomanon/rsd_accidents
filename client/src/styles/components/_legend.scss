@@ -1,0 +1,23 @@
+.legend {
+
+  &__list {
+    margin-top: .5rem;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 3px;
+    }
+  }
+
+  &__color {
+    display: inline-block;
+    height: 4px;
+    width: 1.5rem;
+    margin-right: 0.5rem;
+    // border-radius: 50%;
+  }
+}

@@ -29,7 +29,6 @@ class RightMenu extends Component {
                 comp: () => <Menu
                     hour={this.props.map.hour}
                     hourSet={this.props.hourSet}
-                    legend={this.props.map.legend}
                     extent={this.props.map.extent}
                     chartGet={this.props.chartGet}
                     modalToggle={this.props.modalToggle}
@@ -39,6 +38,8 @@ class RightMenu extends Component {
                 name: "legend",
                 icon: "far fa-map",
                 comp: () => <Legend
+                    hour={this.props.map.hour}
+                    legend={this.props.map.legend}
                 />
             }
         ];
