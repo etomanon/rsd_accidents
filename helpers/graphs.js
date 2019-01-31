@@ -56,6 +56,7 @@ const graphs = {
               data: result[i]
             }
           })
+          // transform line result for recharts graph library
           let lineData = [];
           const line = TABLES.forEach((table, i) => {
             const { name, title } = table;

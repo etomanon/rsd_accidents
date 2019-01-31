@@ -1,5 +1,7 @@
 const MBTiles = require('@mapbox/mbtiles');
 
+const LAYERS = require("./layers");
+
 let tiles = {};
 
 const createMbtiles = (path) => {
@@ -12,53 +14,14 @@ const createMbtiles = (path) => {
     })
 }
 
-createMbtiles('db/data/result_weekday.mbtiles')
-    .then(result => {
-        tiles.weekday = result;
-    })
-    .catch(err => {
-        console.log(err)
-    })
-
-createMbtiles('db/data/result_weekday_2000.mbtiles')
-    .then(result => {
-        tiles.weekday2000 = result;
-    })
-    .catch(err => {
-        console.log(err)
-    })
-
-createMbtiles('db/data/result_weekday_10000.mbtiles')
-    .then(result => {
-        tiles.weekday10000 = result;
-    })
-    .catch(err => {
-        console.log(err)
-    })
-
-
-createMbtiles('db/data/result_weekend.mbtiles')
-    .then(result => {
-        tiles.weekend = result;
-    })
-    .catch(err => {
-        console.log(err);
-    })
-
-createMbtiles('db/data/result_weekend_2000.mbtiles')
-    .then(result => {
-        tiles.weekend2000 = result;
-    })
-    .catch(err => {
-        console.log(err);
-    })
-
-createMbtiles('db/data/result_weekend_10000.mbtiles')
-    .then(result => {
-        tiles.weekend10000 = result;
-    })
-    .catch(err => {
-        console.log(err);
-    })
+LAYERS.server.forEach((layer, i) => {
+    createMbtiles(`db/data/${layer}`)
+        .then(result => {
+            tiles[LAYERS.client[i]] = result;
+        })
+        .catch(err => {
+            console.log(err)
+        })
+})
 
 module.exports = tiles;
