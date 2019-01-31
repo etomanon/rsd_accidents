@@ -9,6 +9,8 @@
   line-height: 1.5;
 
   &__item {
+    display: flex;
+    align-items: center;
     margin-right: 1rem;
   }
 

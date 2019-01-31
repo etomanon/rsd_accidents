@@ -36,11 +36,12 @@ export default class Menu extends Component {
                         variant="contained"
                         color="primary"
                         onClick={e => {
+                            console.log(this.props.extent);
                             this.props.chartGet(this.props.extent);
                             this.props.modalToggle();
                         }}
                     >
-                        Zobraz grafy pro oblast
+                        Vykreslit grafy pro zobrazenou oblast
                 </Button>
                 </div>
                 <div className="mt-20">

@@ -6,19 +6,51 @@ import { valuesIn, keysIn } from "lodash";
 
 import Layers from "./rightMenu/layers";
 import Menu from "./rightMenu/menu";
-
+import Legend from "./rightMenu/legend";
 
 
 class RightMenu extends Component {
-    constructor() {
-        super();
-        this.state = {
-            layers: false,
-            menu: false
-        }
+    constructor(props) {
+        super(props);
+        this.state = {};
+        this.items = [
+            {
+                name: "layers",
+                icon: "fas fa-layer-group",
+                comp: () => <Layers
+                    layers={this.props.map.layers}
+                    layerToggle={this.props.layerToggle}
+                    layerOpacity={this.props.layerOpacity}
+                />
+            },
+            {
+                name: "menu",
+                icon: "fas fa-ellipsis-v",
+                comp: () => <Menu
+                    hour={this.props.map.hour}
+                    hourSet={this.props.hourSet}
+                    legend={this.props.map.legend}
+                    extent={this.props.map.extent}
+                    chartGet={this.props.chartGet}
+                    modalToggle={this.props.modalToggle}
+                />
+            },
+            {
+                name: "legend",
+                icon: "far fa-map",
+                comp: () => <Legend
+                />
+            }
+        ];
     }
     componentDidMount() {
         this.props.legendGet();
+        this.items.forEach(item => {
+            const key = item.name;
+            this.setState({
+                [key]: false
+            });
+        })
     }
     onToggle = (key) => {
         keysIn(this.state).forEach(key => {
@@ -30,40 +62,36 @@ class RightMenu extends Component {
             [key]: !this.state[key]
         })
     }
+    button = (name, icon) => {
+        return (
+            <div
+                key={name}
+                onClick={e => this.onToggle(name)}
+                className={`mt-10 button ${this.state[name] && "button--active"}`}>
+                <i className={icon}></i>
+            </div>
+        );
+    }
+    submenu = (name, comp) => {
+        return (
+            <div
+                key={name}
+                className={`right-menu__submenu ${this.state[name] && "right-menu__submenu--active"}`}>
+                {comp()}
+            </div>
+        );
+    }
     render() {
         return (
             <div className={`right-menu ${valuesIn(this.state).some((v) => v) && "right-menu--active"}`}>
                 <div className="right-menu__options container-column">
-                    <div
-                        onClick={e => this.onToggle("layers")}
-                        className={`mt-10 button ${this.state.layers && "button--active"}`}>
-                        <i className="fas fa-layer-group"></i>
-                    </div>
-                    <div
-                        onClick={e => this.onToggle("menu")}
-                        className={`mt-10 button ${this.state.menu && "button--active"}`}>
-                        <i className="fas fa-ellipsis-v"></i>
-                    </div>
+                    {
+                        this.items.map(item => this.button(item.name, item.icon))
+                    }
                 </div>
-                <div
-                    className={`right-menu__submenu ${this.state.layers && "right-menu__submenu--active"}`}>
-                    <Layers
-                        layers={this.props.map.layers}
-                        layerToggle={this.props.layerToggle}
-                        layerOpacity={this.props.layerOpacity}
-                    />
-                </div>
-                <div
-                    className={`right-menu__submenu ${this.state.menu && "right-menu__submenu--active"}`}>
-                    <Menu
-                        hour={this.props.map.hour}
-                        hourSet={this.props.hourSet}
-                        legend={this.props.map.legend}
-                        extent={this.props.map.extent}
-                        chartGet={this.props.chartGet}
-                        modalToggle={this.props.modalToggle}
-                    />
-                </div>
+                {
+                    this.items.map(item => this.submenu(item.name, item.comp))
+                }
             </div>
 
         );

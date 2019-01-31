@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import ResizeObserver from 'resize-observer-polyfill';
 
 import Map from "ol/Map";
 import View from "ol/View";
-import {defaults as defaultControls, ScaleLine} from 'ol/control';
+import { defaults as defaultControls, ScaleLine } from 'ol/control';
 import { fromLonLat } from "ol/proj";
 import "ol/ol.css";
 
@@ -31,10 +32,18 @@ export default class MainMap extends Component {
     Events.init(this.mapEl, this.props.map);
 
     Layers.update(this.mapEl, this.props.map);
+    const updateMapSize = (entries, observer) => {
+      this.mapEl.updateSize();
+    }
+    this.observer = new ResizeObserver(updateMapSize);
+    this.observer.observe(this.map);
   }
   componentDidUpdate(prevProps) {
     Layers.update(this.mapEl, this.props.map);
     Events.update(this.props.map);
+  }
+  componentWillUnmount() {
+    this.observer.unobserve(this.map);
   }
   render() {
     return (

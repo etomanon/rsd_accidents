@@ -13,10 +13,10 @@ class Home extends Component {
         return (
             <div>
                 {/* <div className="background-primary text-white">Home</div> */}
+                <RightMenu />
                 <MainMap
                     map={this.props.map}
                 />
-                <RightMenu />
                 <ChartModal
                     showModal={this.props.map.showModal}
                     modalToggle={this.props.modalToggle}

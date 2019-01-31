@@ -57,7 +57,7 @@ class ChartModal extends React.Component {
           }
           {
             chart.line && <LineGraph
-              title="Průběh nehodovosti"
+              title="Průběh nehodovosti během dne"
               data={chart.line}
             />
           }

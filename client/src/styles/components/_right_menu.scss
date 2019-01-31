@@ -8,6 +8,10 @@
 
 .right-menu--active {
     transform: translate3d(0, 0, 0);
+
+    & ~ .main-map {
+        width: calc(100% - 320px);
+    }
 }
 
 .right-menu__options {
