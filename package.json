@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@mapbox/mbtiles": "^0.10.0",
+        "@turf/turf": "^5.1.6",
         "axios": "^0.18.0",
         "body-parser": "^1.18.2",
         "dotenv": "^5.0.0",

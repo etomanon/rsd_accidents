@@ -8,6 +8,11 @@ class LayerSlider extends Component {
             value: 1
         }
     }
+    componentDidMount() {
+        this.setState({
+            value: this.props.initOpacity
+        })
+    }
     onChange = (event, value) => {
         this.setState({ value });
         this.props.onOpacity(this.props.layerId, value);

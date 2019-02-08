@@ -41,10 +41,16 @@ class ChartModal extends React.Component {
         onClose={modalToggle}
       >
         <div style={getModalStyle()} className={classes.paper}>
-          <div className="text-center">
+          <div className="text-center full-width">
             <div className="small">Počet nehod je relativizovaný podle počtu dní (víkend - 2 dny, pracovní týden - 5 dní)</div>
             <div className="small mb-10">Typy komunikací jsou tříděny podle <a href="https://wiki.openstreetmap.org/wiki/Key:highway" rel="noopener noreferrer" target="_blank" >OpenStreetMap kategorií</a></div>
           </div>
+          {
+            chart.line && <LineGraph
+              title="Průběh nehodovosti během dne"
+              data={chart.line}
+            />
+          }
           {
             chart.pie && chart.pie.map(chart => {
               const { title, data } = chart;
@@ -54,12 +60,6 @@ class ChartModal extends React.Component {
                 data={data}
               />
             })
-          }
-          {
-            chart.line && <LineGraph
-              title="Průběh nehodovosti během dne"
-              data={chart.line}
-            />
           }
         </div>
       </Modal>

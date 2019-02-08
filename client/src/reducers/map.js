@@ -1,6 +1,6 @@
 import {
     LAYER_TOGGLE, LAYER_OPACITY, HOUR_SET, RESOLUTION_SET, LEGEND_GET,
-    MODAL_TOGGLE, EXTENT_SET, CHART_GET
+    MODAL_TOGGLE, EXTENT_SET, CHART_GET, GRID_DATA
 } from '../actions';
 
 export default function (state = {
@@ -31,6 +31,13 @@ export default function (state = {
         opacity: 1,
         show: true,
         zIndex: 4
+    },
+    {
+        id: "grid",
+        name: "Grid",
+        opacity: 0.33,
+        show: true,
+        zIndex: 5
     }
     ],
     hour: -1,
@@ -43,9 +50,22 @@ export default function (state = {
     },
     legend: [],
     chart: [],
-    showModal: false
+    showModal: false,
+    gridData: {
+        "type": "FeatureCollection",
+        "features": []
+    },
+    gridLegend: [],
+    isFetching: false
 }, action) {
     switch (action.type) {
+        case LEGEND_GET + "_PENDING":
+        case CHART_GET + "_PENDING":
+        case GRID_DATA + "_PENDING":
+            return {
+                ...state,
+                isFetching: true
+            }
         case LAYER_TOGGLE:
             return {
                 ...state,
@@ -86,17 +106,27 @@ export default function (state = {
         case LEGEND_GET + "_FULFILLED":
             return {
                 ...state,
-                legend: action.payload.data
+                legend: action.payload.data,
+                isFetching: false
             }
         case CHART_GET + "_FULFILLED":
             return {
                 ...state,
-                chart: action.payload.data
+                chart: action.payload.data,
+                isFetching: false
             }
         case MODAL_TOGGLE:
             return {
                 ...state,
                 showModal: !state.showModal
+            }
+
+        case GRID_DATA + "_FULFILLED":
+            return {
+                ...state,
+                gridData: action.payload.data.geojson,
+                gridLegend: action.payload.data.legend,
+                isFetching: false
             }
         default:
             return state;

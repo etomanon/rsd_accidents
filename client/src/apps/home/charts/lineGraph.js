@@ -7,7 +7,7 @@ class LineGraph extends React.Component {
     const { title, data } = this.props;
     return (
       <>
-      <div className="mb-10 text-center bold">{title}</div>
+      <div className="mb-10 mt-10 text-center bold">{title}</div>
         <LineChart width={1000} height={500} data={data}
           margin={{ top: 15, right: 100, left: 100, bottom: 40 }}>
           <XAxis dataKey="name" >

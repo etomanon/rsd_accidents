@@ -22,6 +22,7 @@ export default class Layers extends Component {
                                     </Button>
                                 </div>
                                 <LayerSlider
+                                    initOpacity={layer.opacity}
                                     layerId={layer.id}
                                     onOpacity={this.props.layerOpacity}
                                 />

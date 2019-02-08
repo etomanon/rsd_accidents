@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { modalToggle } from "src/actions/index";
 
-
+import Loader from "../components/loader";
 import MainMap from "./home/mainMap";
 import RightMenu from "./home/rightMenu";
 import ChartModal from "./home/charts/chartModal";
@@ -22,6 +22,7 @@ class Home extends Component {
                     modalToggle={this.props.modalToggle}
                     chart={this.props.map.chart}
                 />
+                <Loader display={this.props.map.isFetching} />
             </div>
         )
     }

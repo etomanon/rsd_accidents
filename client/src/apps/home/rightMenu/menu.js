@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Slider from '@material-ui/lab/Slider';
+import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 
 export default class Menu extends Component {
@@ -32,17 +33,31 @@ export default class Menu extends Component {
                     onChange={this.onChange}
                 />
                 <div className="mt-20 text-center">
+                <Tooltip title="Pro zobrazenou oblast" placement="top">
                     <Button
                         variant="contained"
                         color="primary"
                         onClick={e => {
-                            console.log(this.props.extent);
                             this.props.chartGet(this.props.extent);
                             this.props.modalToggle();
                         }}
                     >
-                        Vykreslit grafy pro zobrazenou oblast
+                        Vykreslit grafy
+                    </Button>
+                    </Tooltip>
+                </div>
+                <div className="mt-20 text-center">
+                    <Tooltip title="Součet všech nehod" placement="top">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={e => {
+                                this.props.gridData(this.props.extent);
+                            }}
+                        >
+                            Zobraz grid
                 </Button>
+                    </Tooltip>
                 </div>
             </div>
         );

@@ -39,7 +39,7 @@ export default class MainMap extends Component {
     this.observer.observe(this.map);
   }
   componentDidUpdate(prevProps) {
-    Layers.update(this.mapEl, this.props.map);
+    Layers.update(this.mapEl, this.props.map, prevProps.map);
     Events.update(this.props.map);
   }
   componentWillUnmount() {

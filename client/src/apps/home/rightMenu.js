@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { layerToggle, layerOpacity, hourSet, legendGet, chartGet, modalToggle } from "src/actions/index";
+import { layerToggle, layerOpacity, hourSet, legendGet, chartGet, modalToggle,
+    gridData } from "src/actions/index";
 import { valuesIn, keysIn } from "lodash";
 
 import Layers from "./rightMenu/layers";
@@ -32,6 +33,7 @@ class RightMenu extends Component {
                     extent={this.props.map.extent}
                     chartGet={this.props.chartGet}
                     modalToggle={this.props.modalToggle}
+                    gridData={this.props.gridData}
                 />
             },
             {
@@ -40,6 +42,7 @@ class RightMenu extends Component {
                 comp: () => <Legend
                     hour={this.props.map.hour}
                     legend={this.props.map.legend}
+                    gridLegend={this.props.map.gridLegend}
                 />
             }
         ];
@@ -108,7 +111,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ layerToggle, layerOpacity, hourSet, legendGet, chartGet, modalToggle }, dispatch)
+    return bindActionCreators({ layerToggle, layerOpacity, hourSet, legendGet, 
+        chartGet, modalToggle, gridData }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);

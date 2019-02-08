@@ -1,11 +1,14 @@
 import TileLayer from "ol/layer/Tile.js";
 import XYZ from "ol/source/XYZ.js";
 import OSM from "ol/source/OSM";
+import { Vector as VectorSource } from "ol/source.js";
+import GeoJSON from 'ol/format/GeoJSON.js';
 import VectorTile from "ol/layer/VectorTile";
 import VectorTileSource from "ol/source/VectorTile"
-import { Group as LayerGroup } from 'ol/layer.js';
+import { Group as LayerGroup, Vector as VectorLayer } from 'ol/layer.js';
 import MVT from "ol/format/MVT";
 import Feature from 'ol/Feature';
+import { isEqual } from "lodash";
 
 import Styles from "./styles";
 
@@ -116,6 +119,13 @@ export default new class Layers {
                         150
                     ),
                 ]
+            }),
+            new VectorLayer({
+                id: "grid",
+                source: new VectorSource({}),
+                style: null,
+                zIndex: 5,
+                show: true
             })
         ];
 
@@ -124,7 +134,7 @@ export default new class Layers {
         })
     }
 
-    update = (map, stateMap) => {
+    update = (map, stateMap, prevMap) => {
         const newLayers = stateMap.layers;
         this.defaultLayers.forEach(layer => {
             newLayers.forEach(newLayer => {
@@ -154,5 +164,14 @@ export default new class Layers {
             layersAll.push(layer);
         })
         Styles.updateStyle(stateMap, layersAll);
+        let prevData = prevMap && prevMap.gridData;
+        if (!isEqual(stateMap.gridData, prevData)) {
+            console.log(this.defaultLayers)
+            const gridLayer = this.defaultLayers.find(l => l.get("id") === "grid");
+            const source = gridLayer.getSource();
+            source.clear(true);
+            const newData = (new GeoJSON()).readFeatures(stateMap.gridData);
+            source.addFeatures(newData);
+        }
     }
 }();

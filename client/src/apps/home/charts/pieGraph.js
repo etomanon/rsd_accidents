@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PieChart, Pie, Cell, Legend } from "recharts";
+import { PieChart, Pie, Cell, Legend, Tooltip } from "recharts";
 
 import { COLORS } from './utils';
 
@@ -33,6 +33,7 @@ class PieGraph extends React.Component {
         width={1000}
         height={600}
       >
+        <Tooltip />
         <Legend
           verticalAlign="top"
           title={title}

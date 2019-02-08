@@ -8,6 +8,7 @@ export const EXTENT_SET = 'EXTENT_SET';
 export const LEGEND_GET = 'LEGEND_GET';
 export const CHART_GET = 'CHART_GET';
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';
+export const GRID_DATA = 'GRID_DATA';
 
 export function layerToggle(layerId) {
     return {
@@ -67,5 +68,13 @@ export function chartGet(bbox) {
 export function modalToggle() {
     return {
         type: MODAL_TOGGLE
+    }
+}
+
+export function gridData(bbox) {
+    const request = axios.post(`/api/data/grid`, { bbox })
+    return {
+        type: GRID_DATA,
+        payload: request
     }
 }

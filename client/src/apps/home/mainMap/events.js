@@ -21,6 +21,7 @@ export default new class Events {
             offset: [0, -10],
             className: "background-primary p-10 text-white arrow-down"
         });
+        this.markerEl.style.width = "120px";
         map.addOverlay(this.marker);
     }
 
@@ -46,15 +47,25 @@ export default new class Events {
         if (!features) return;
         const feature = features[0];
         const properties = feature.getProperties();
-        console.log(properties)
-        const point = this.points === -1 ? "total" : this.points;
-        this.markerEl.innerHTML = `
+        const type = feature.getGeometry().getType();
+        if (type === "Polygon") {
+            this.markerEl.innerHTML = `
+            <div class="container-column align-center">
+                <div class='mb-10 bold'>Počet nehod</div>
+                <div class="">${properties["points"]}</div>
+            </div>
+            `;
+        }
+        else {
+            const point = this.points === -1 ? "total" : this.points;
+            this.markerEl.innerHTML = `
         <div class="container-column align-center">
             <div class='mb-10 bold'>Počet nehod</div>
             <div class="mb-10">${properties["points_" + point]}</div>
             <div>Typ: ${properties.highway}</div>
         </div>
         `;
+        }
         const pos = getCenter(feature.getGeometry().getExtent());
         this.marker.setPosition(pos);
     }

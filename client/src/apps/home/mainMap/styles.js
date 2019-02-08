@@ -1,6 +1,8 @@
 import Style from "ol/style/Style";
 import Stroke from "ol/style/Stroke";
+import Fill from "ol/style/Fill";
 import LineString from 'ol/geom/LineString';
+import { isEqual } from "lodash";
 
 export default new class Styles {
     constructor() {
@@ -8,6 +10,7 @@ export default new class Styles {
         this.hour = -1;
         this.points = this.hour === -1 ? "points_total" : `points_${this.hour}`;
         this.legends = [];
+        this.gridLegend = [];
     }
     updateStyle = (stateMap, layersAll) => {
         if (this.hour !== stateMap.hour ||
@@ -35,7 +38,13 @@ export default new class Styles {
                 layer.changed();
             })
         }
-
+        if (!isEqual(this.gridLegend, stateMap.gridLegend)) {
+            this.gridLegend = stateMap.gridLegend;
+            const gridLayer = layersAll.find(l => l.get("id") === "grid");
+            gridLayer.setStyle((feature, resolution) => {
+                return this.grid(feature, resolution, this.gridLegend);
+            })
+        }
 
     }
     offsetLine = (geometry, resolution) => {
@@ -64,7 +73,7 @@ export default new class Styles {
         const points = feature.get(this.points);
         let geometry = feature.getGeometry();
         if (points !== 0) {
-            if(geometry.getLength() > 2001) geometry = geometry.simplify(11000);
+            if (geometry.getLength() > 2001) geometry = geometry.simplify(11000);
             geometry = this.offsetLine(geometry, resolution);
         }
         return new Style({
@@ -107,5 +116,17 @@ export default new class Styles {
             return 2;
         }
         return 4;
+    }
+
+    grid = (feature, resolution, gridLegend) => {
+        return new Style({
+            stroke: new Stroke({
+                color: '#000',
+                width: 2
+            }),
+            fill: new Fill({
+                color: this.color(feature.get("points"), gridLegend.ranges)
+            })
+        })
     }
 }()
