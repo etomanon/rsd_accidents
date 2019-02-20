@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 
+import Tooltip from '@material-ui/core/Tooltip'
 import Button from '@material-ui/core/Button';
 import Collapse from '@material-ui/core/Collapse';
 
 const LEGEND_LAYERS = {
   result_weekday30: {
-    name: "Pracovní týden (30 m úsek)"
+    name: "Nehodovost na 30 m úseku"
   },
   result_weekday2000: {
-    name: "Pracovní týden (D1 2 km úsek)"
+    name: "Nehodovost na 2 km úseku"
   },
   result_weekday10000: {
-    name: "Pracovní týden (D1 10 km úsek)"
+    name: "Nehodovost na 10 km úseku"
   },
   result_weekend30: {
-    name: "Víkend (30 m úsek)"
+    name: "Nehodovost na 30 m úseku"
   },
   result_weekend2000: {
-    name: "Víkend (D1 2 km úsek)"
+    name: "Nehodovost na 2 km úseku"
   },
   result_weekend10000: {
-    name: "Víkend (D1 10 km úsek)"
+    name: "Nehodovost na 10 km úseku"
   },
 }
 const COLORS = [
@@ -55,9 +56,9 @@ export default class Legend extends Component {
               return i + 1 !== ranges.length ?
                 <li className="legend__item" key={i}>
                   <span style={{ background: COLORS[i] }} className="legend__color" />
-                  {i === 0 ? `${range} - ${ranges[1]} (${legend.countFeatures[i]})`
-                    :
-                    `${(ranges[i] + 0.01).toFixed(2)} - ${ranges[i + 1]} (${legend.countFeatures[i]})`}
+                  {i === 0 && `Nízká (${range} - ${ranges[1]} | ${legend.countFeatures[i]})`}
+                  {i === 1 && `Střední (${(ranges[i] + 0.01).toFixed(2)} - ${ranges[i + 1]} | ${legend.countFeatures[i]})`}
+                  {i === 2 && `Vysoká (${(ranges[i] + 0.01).toFixed(2)} - ${ranges[i + 1]} | ${legend.countFeatures[i]})`}
                 </li>
                 :
                 null
@@ -99,7 +100,13 @@ export default class Legend extends Component {
           {title}
         </Button>
         <Collapse in={this.state[name]}>
-          <div className="mb-20 mt-20">počet nehod* (počet úseků v intervalu)</div>
+
+          <div className="mb-20 mt-20">Úroveň (
+            <Tooltip key={name} title={"Počet nehod je relativizovaný podle počtu dní (víkend - 2 dny, pracovní týden - 5 dní)"} placement="left">
+              <span className="action">interval počtu nehod <i className="fas fa-info-circle"></i></span>
+            </Tooltip>
+            <span> | počet úseků v intervalu)</span>
+            </div>
           {this.props.legend
             .filter((l, i) => i > start && i < end)
             .map((legend, i) => {
@@ -110,7 +117,6 @@ export default class Legend extends Component {
                 null
             })
           }
-          <div className="mt-20">*Počet nehod je relativizovaný podle počtu dní (víkend - 2 dny, pracovní týden - 5 dní)</div>
         </Collapse>
       </div>
     );
@@ -118,7 +124,7 @@ export default class Legend extends Component {
   render() {
     return (
       <div className="p-20 container-column">
-        <div className="big mb-10">Legenda</div>
+        <div className="big mb-20">Legenda</div>
         {this.mainLegend("weekend", "Víkend", 2, 6)}
         {this.mainLegend("weekday", "Pracovní týden", -1, 3)}
         {
@@ -132,11 +138,16 @@ export default class Legend extends Component {
               Grid
           </Button>
             <Collapse in={this.state["grid"]}>
-              <div className="mb-20 mt-20">počet nehod* (počet čtverců v intervalu)</div>
+              <div className="mb-20 mt-20">
+              <Tooltip title={"Počet nehod celkem (víkend + pracovní týden)"} placement="left">
+              <span className="action">Počet nehod <i className="fas fa-info-circle"></i></span>
+            </Tooltip>
+            <span> (počet čtverců v intervalu)</span>
+            
+            </div>
               {
                 this.gridItem(this.props.gridLegend)
               }
-              <div className="mt-20">*Počet nehod celkem (víkend + pracovní týden)</div>
             </Collapse>
           </div>
         }

@@ -48,6 +48,13 @@ router.post('/grid', function (req, res, next) {
     db.many(geojson, { table: "accidents", xMin: bbox[0], yMin: bbox[1], xMax: bbox[2], yMax: bbox[3] })
         .then(function (data) {
             let accidents = (data[0].jsonb_build_object);
+            if (!accidents.features) return res.json({
+                geojson: { type: "Polygon", coordinates: [] },
+                legend: {
+                    ranges: [],
+                    countFeatures: []
+                }
+            });
             accidents = turf.toWgs84(accidents);
             let min = [bbox[0], bbox[1]];
             let max = [bbox[2], bbox[3]]
@@ -69,9 +76,11 @@ router.post('/grid', function (req, res, next) {
             })
             clone.features = clone.features.filter(f => f.properties.points > 0);
             let final = turf.toMercator(clone);
+
             let geo = new geostats(counts);
             geo.getClassJenks(3);
             geo.doCount();
+
             res.json({
                 geojson: final,
                 legend: {

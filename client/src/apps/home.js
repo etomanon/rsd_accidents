@@ -12,7 +12,6 @@ class Home extends Component {
     render() {
         return (
             <div>
-                {/* <div className="background-primary text-white">Home</div> */}
                 <RightMenu />
                 <MainMap
                     map={this.props.map}

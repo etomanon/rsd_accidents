@@ -8,6 +8,7 @@ export default class Layers extends Component {
         return (
             <div>
                 <div className="container-column p-20 list-mt-20">
+                <div className="big">Vrstvy</div>
                     {this.props.layers.map((layer, i) => {
                         return (
                             <div key={i}>

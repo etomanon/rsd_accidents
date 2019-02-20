@@ -18,7 +18,8 @@ export default class Menu extends Component {
 
     render() {
         return (
-            <div className="mt-20 p-20 container-column">
+            <div className="p-20 container-column">
+                <div className="big mb-20">Menu</div>
                 <div className="text-left mb-20 text-center">
                     {!(this.state.value === -1) ?
                         `Hodina: ${this.state.value}:00 - ${this.state.value + 1}:00`
@@ -33,27 +34,29 @@ export default class Menu extends Component {
                     onChange={this.onChange}
                 />
                 <div className="mt-20 text-center">
-                <Tooltip title="Pro zobrazenou oblast" placement="top">
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={e => {
-                            this.props.chartGet(this.props.extent);
-                            this.props.modalToggle();
-                        }}
-                    >
-                        Vykreslit grafy
+                    <Tooltip title="Pro zobrazenou oblast" placement="left">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={e => {
+                                this.props.chartGet(this.props.extent);
+                                this.props.modalToggle();
+                            }}
+                            fullWidth={true}
+                        >
+                            Vykreslit grafy
                     </Button>
                     </Tooltip>
                 </div>
                 <div className="mt-20 text-center">
-                    <Tooltip title="Součet všech nehod" placement="top">
+                    <Tooltip title="Součet všech nehod" placement="left">
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={e => {
                                 this.props.gridData(this.props.extent);
                             }}
+                            fullWidth={true}
                         >
                             Zobraz grid
                 </Button>

@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { layerToggle, layerOpacity, hourSet, legendGet, chartGet, modalToggle,
-    gridData } from "src/actions/index";
+
+import Tooltip from '@material-ui/core/Tooltip';
+
+import {
+    layerToggle, layerOpacity, hourSet, legendGet, chartGet, modalToggle,
+    gridData
+} from "src/actions/index";
 import { valuesIn, keysIn } from "lodash";
 
 import Layers from "./rightMenu/layers";
@@ -17,6 +22,7 @@ class RightMenu extends Component {
         this.items = [
             {
                 name: "layers",
+                title: "Vrstvy",
                 icon: "fas fa-layer-group",
                 comp: () => <Layers
                     layers={this.props.map.layers}
@@ -26,6 +32,7 @@ class RightMenu extends Component {
             },
             {
                 name: "menu",
+                title: "Menu",
                 icon: "fas fa-ellipsis-v",
                 comp: () => <Menu
                     hour={this.props.map.hour}
@@ -38,6 +45,7 @@ class RightMenu extends Component {
             },
             {
                 name: "legend",
+                title: "Legenda",
                 icon: "far fa-map",
                 comp: () => <Legend
                     hour={this.props.map.hour}
@@ -66,14 +74,15 @@ class RightMenu extends Component {
             [key]: !this.state[key]
         })
     }
-    button = (name, icon) => {
+    button = (name, title, icon) => {
         return (
-            <div
-                key={name}
-                onClick={e => this.onToggle(name)}
-                className={`mt-10 button ${this.state[name] && "button--active"}`}>
-                <i className={icon}></i>
-            </div>
+            <Tooltip key={name} title={title} placement="left">
+                <div
+                    onClick={e => this.onToggle(name)}
+                    className={`mt-10 button ${this.state[name] && "button--active"}`}>
+                    <i className={icon}></i>
+                </div>
+            </Tooltip>
         );
     }
     submenu = (name, comp) => {
@@ -90,7 +99,7 @@ class RightMenu extends Component {
             <div className={`right-menu ${valuesIn(this.state).some((v) => v) && "right-menu--active"}`}>
                 <div className="right-menu__options container-column">
                     {
-                        this.items.map(item => this.button(item.name, item.icon))
+                        this.items.map(item => this.button(item.name, item.title, item.icon))
                     }
                 </div>
                 {
@@ -111,8 +120,10 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ layerToggle, layerOpacity, hourSet, legendGet, 
-        chartGet, modalToggle, gridData }, dispatch)
+    return bindActionCreators({
+        layerToggle, layerOpacity, hourSet, legendGet,
+        chartGet, modalToggle, gridData
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);

@@ -38,3 +38,11 @@ html, body {
 .text-justify {
     text-align: justify;
 }
+
+.action {
+    cursor: pointer;
+    color: $secondary;
+    &:hover {
+        text-decoration: underline; 
+    }
+}
