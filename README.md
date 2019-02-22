@@ -1,4 +1,5 @@
 Express, PostgreSQL, React
+Mbtiles location: `server/db/data` 
 ##### Start dev
 ```
 cd server
