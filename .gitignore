@@ -1,10 +1,7 @@
-/node_modules
-/.env
+/server/node_modules
+/server/.env
+/server/db/data
 
 /client/node_modules
-/client/build
-/client/src/styles/css/main.css
+/client/build/
 
-sslcert
-
-/db/data

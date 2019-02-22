@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    client:
+        image: node:8.15.0
+        restart: always
+        ports:
+            - "3000:3000"
+        working_dir: /client
+        volumes:
+            - ./client:/client
+        entrypoint: ["npm", "start"]
+        # links:
+        #     - server
+    server:
+        image: rsd-server
+        restart: always
+        ports:
+            - "5000:5000"
+        volumes:
+            - ./server:/server
+            - /server/node_modules
+        depends_on:
+            - postgres
+    postgres:
+        image: mdillon/postgis
+        restart: always
+        container_name: postgres
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+        ports:
+            - 5432:5432   
