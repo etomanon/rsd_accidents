@@ -1,19 +1,5 @@
 version: "3.7"
 services:
-    client:
-        image: rsd-client
-        build: ./client
-        restart: always
-        ports:
-            - "3000:3000"
-        # working_dir: /client
-        # volumes:
-        #     - ./client:/client
-        #     - /client/node_modules
-        #     - /client/build
-        # entrypoint: ["npm", "start"]
-        # links:
-        #     - server
     server:
         image: rsd-server
         build: ./server
