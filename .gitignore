@@ -1,7 +1,9 @@
 /server/node_modules
 /server/.env
 /server/db/data
+/server/build
 
 /client/node_modules
 /client/build/
 
+/postgres
