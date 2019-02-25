@@ -1,19 +1,25 @@
 version: "3.7"
 services:
     client:
-        image: node:8.15.0
+        image: rsd-client
+        build: ./client
         restart: always
         ports:
             - "3000:3000"
-        working_dir: /client
-        volumes:
-            - ./client:/client
-        entrypoint: ["npm", "start"]
+        # working_dir: /client
+        # volumes:
+        #     - ./client:/client
+        #     - /client/node_modules
+        #     - /client/build
+        # entrypoint: ["npm", "start"]
         # links:
         #     - server
     server:
         image: rsd-server
+        build: ./server
         restart: always
+        environment:
+            - NODE_ENV=production
         ports:
             - "5000:5000"
         volumes:
@@ -28,4 +34,4 @@ services:
         volumes:
             - ./postgres:/var/lib/postgresql/data
         ports:
-            - 5432:5432   
+            - 54322:5432
