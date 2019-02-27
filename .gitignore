@@ -1,7 +1,7 @@
 /server/node_modules
 /server/.env
+# vector tiles, database
 /server/db/data
-/server/build
 
 /client/node_modules
 /client/build/

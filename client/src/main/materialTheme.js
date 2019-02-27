@@ -25,6 +25,9 @@ const theme = createMuiTheme({
             }
         }
     },
+    typography: {
+        useNextVariants: true,
+      },
 });
 
 export default class MaterialTheme extends Component {

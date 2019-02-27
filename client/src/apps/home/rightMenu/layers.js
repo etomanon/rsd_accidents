@@ -7,7 +7,7 @@ export default class Layers extends Component {
     render() {
         return (
             <div>
-                <div className="container-column p-20 list-mt-20">
+                <div className="container-column p-20 list-mt-20 overflow-hidden">
                 <div className="big">Vrstvy</div>
                     {this.props.layers.map((layer, i) => {
                         return (

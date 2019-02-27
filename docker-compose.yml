@@ -1,18 +1,32 @@
-version: "3.7"
+version: "3.6"
 services:
+    client:
+        image: rsd-client
+        container_name: rsd-client
+        build: ./client
+        env_file:
+            - .env
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./client:/client
+            - /client/node_modules
     server:
         image: rsd-server
+        container_name: rsd-server
         build: ./server
         restart: always
-        environment:
-            - NODE_ENV=production
+        env_file:
+            - .env
         ports:
             - "5000:5000"
         volumes:
+            - ./client:/client
             - ./server:/server
             - /server/node_modules
         depends_on:
             - postgres
+            - client
     postgres:
         image: mdillon/postgis
         restart: always
