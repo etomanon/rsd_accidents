@@ -71,6 +71,9 @@ router.post('/grid', function (req, res, next) {
             let counts = [];
             geojson.features.forEach((el, ix) => {
                 points = turf.pointsWithinPolygon(accidents, el);
+                accidents.features = accidents.features.filter(accident => {
+                    return !points.features.some(point => point.id === accident.id)   
+                })
                 clone.features[ix].properties.points = points.features.length
                 if (points.features.length > 0) counts.push(points.features.length);
             })
