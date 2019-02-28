@@ -7,5 +7,5 @@
 /client/build/
 
 /postgres
-./.env
+.env
 
