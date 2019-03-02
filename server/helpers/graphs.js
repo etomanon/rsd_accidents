@@ -9,6 +9,30 @@ const TABLES = [{
   title: 'Víkend'
 }];
 
+const TYPE_CZ = {
+  bus_stop: "Autobusová zastávka",
+  corridor: "Vnitřek budovy",
+  cycleway: "Cyklostezka",
+  living_street: "Obytná zóna",
+  motorway: "Dálnice",
+  motorway_link: "Dálnice sjezd/nájezd",
+  platform: "Zastávka veřejné dopravy",
+  primary: "Silnice I. třídy",
+  primary_link: "Silnice I. třídy nájezd/sjezd",
+  raceway: "Závodní okruh",
+  residential: "Obslužná komunikace v bytové zástavbě",
+  secondary: "Silnice II. třídy",
+  secondary_link: "Silnice II. třídy nájezd/sjezd",
+  service: "Přístupová silnice k objektu",
+  tertiary: "Silnice III. třídy",
+  tertiary_link: "Silnice III. třídy nájezd/sjezd",
+  traffic_island: "Přechod pro chodce",
+  trunk: "Rychlostní komunikace",
+  trunk_link: "Rychlostní komunikace nájezd/sjezd",
+  unclassified: "Neklasifikováno",
+  yes: "Neklasifikováno"
+}
+
 const where = " WHERE wkb_geometry && ST_MakeEnvelope(${xmin}, ${ymin}, ${xmax}, ${ymax}, 3857) AND ST_Length(wkb_geometry) < 2001";
 
 const graphs = {
@@ -50,10 +74,14 @@ const graphs = {
         .then((result) => {
           const pie = TABLES.map((table, i) => {
             const { name, title } = table;
+            const data = result[i].map(t => {
+              t.name = TYPE_CZ[t.name];
+              return t;
+            })
             return {
               table: name,
-              title: title,
-              data: result[i]
+              title,
+              data
             }
           })
           // transform line result for recharts graph library

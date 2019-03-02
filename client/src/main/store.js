@@ -11,7 +11,10 @@ if (process.env.NODE_ENV === `development`) {
 }
 
 const configureStore = () => {
-    const store = compose(applyMiddleware(...middlewares))(createStore)(reducers);
+    const store = compose(applyMiddleware(...middlewares))(createStore)(
+      reducers,
+      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    );
   
     if (process.env.NODE_ENV !== "production") {
       if (module.hot) {

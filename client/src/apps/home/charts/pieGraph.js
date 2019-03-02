@@ -33,7 +33,12 @@ class PieGraph extends React.Component {
         width={1000}
         height={600}
       >
-        <Tooltip />
+        <Tooltip
+          formatter={(value, name, props) => {
+            const total = data.reduce((a, b) => a + b.value, 0);
+            return (value / (total / 100)).toFixed(1) + " % (" + value + ")";
+          }}
+        />
         <Legend
           verticalAlign="top"
           title={title}

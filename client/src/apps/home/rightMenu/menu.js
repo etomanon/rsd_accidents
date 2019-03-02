@@ -18,7 +18,7 @@ export default class Menu extends Component {
 
     render() {
         return (
-            <div className="p-20 container-column">
+            <div className="p-20 container-column overflow-hidden">
                 <div className="big mb-20">Menu</div>
                 <div className="text-left mb-20 text-center">
                     {!(this.state.value === -1) ?
