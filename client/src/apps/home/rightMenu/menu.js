@@ -20,11 +20,13 @@ export default class Menu extends Component {
         return (
             <div className="p-20 container-column overflow-hidden">
                 <div className="big mb-20">Menu</div>
-                <div className="text-left mb-20 text-center">
+                
+                <div  className="text-left mb-20 text-center">
                     {!(this.state.value === -1) ?
                         `Hodina: ${this.state.value}:00 - ${this.state.value + 1}:00`
                         :
                         "Celý den"}
+                
                 </div>
                 <Slider
                     min={-1}
@@ -32,10 +34,12 @@ export default class Menu extends Component {
                     step={1}
                     value={this.state.value}
                     onChange={this.onChange}
+                    id="hour-slider"
                 />
                 <div className="mt-20 text-center">
                     <Tooltip title="Pro zobrazenou oblast" placement="left">
                         <Button
+                            id="graph-button"
                             variant="contained"
                             color="primary"
                             onClick={e => {
@@ -51,6 +55,7 @@ export default class Menu extends Component {
                 <div className="mt-20 text-center">
                     <Tooltip title="Součet všech nehod" placement="left">
                         <Button
+                            id="grid-button"
                             variant="contained"
                             color="primary"
                             onClick={e => {

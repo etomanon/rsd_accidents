@@ -31,6 +31,16 @@ class RightMenu extends Component {
                 />
             },
             {
+                name: "legend",
+                title: "Legenda",
+                icon: "far fa-map",
+                comp: () => <Legend
+                    hour={this.props.map.hour}
+                    legend={this.props.map.legend}
+                    gridLegend={this.props.map.gridLegend}
+                />
+            },
+            {
                 name: "menu",
                 title: "Menu",
                 icon: "fas fa-ellipsis-v",
@@ -41,16 +51,6 @@ class RightMenu extends Component {
                     chartGet={this.props.chartGet}
                     modalToggle={this.props.modalToggle}
                     gridData={this.props.gridData}
-                />
-            },
-            {
-                name: "legend",
-                title: "Legenda",
-                icon: "far fa-map",
-                comp: () => <Legend
-                    hour={this.props.map.hour}
-                    legend={this.props.map.legend}
-                    gridLegend={this.props.map.gridLegend}
                 />
             }
         ];
@@ -64,22 +64,32 @@ class RightMenu extends Component {
             });
         })
     }
-    onToggle = (key) => {
+    resetMenu = () => {
         keysIn(this.state).forEach(key => {
             this.setState({
                 [key]: false
             });
         })
+    }
+    onToggle = (key) => {
+        this.resetMenu()
         this.setState({
             [key]: !this.state[key]
-        })
+        });
+    }
+    onOpen = key => {
+        this.resetMenu()
+        this.setState({
+            [key]: true
+        });
     }
     button = (name, title, icon) => {
         return (
             <Tooltip key={name} title={title} placement="left">
                 <div
+                    id={name}
                     onClick={e => this.onToggle(name)}
-                    className={`mt-10 button ${this.state[name] && "button--active"}`}>
+                    className={`mt-10 button button--menu ${this.state[name] && "button--active"}`}>
                     <i className={icon}></i>
                 </div>
             </Tooltip>
@@ -124,6 +134,6 @@ const mapDispatchToProps = (dispatch) => {
         layerToggle, layerOpacity, hourSet, legendGet,
         chartGet, modalToggle, gridData
     }, dispatch)
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(RightMenu);
+export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(RightMenu);

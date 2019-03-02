@@ -13,6 +13,11 @@ import { isEqual } from "lodash";
 import Styles from "./styles";
 
 export default new class Layers {
+    attributions = `<a href='https://www.muni.cz/' target='_blank'>&copy; MU</a>
+    <a href='https://www.openstreetmap.org' target='_blank'>&copy; OSM</a>
+    <a href='https://www.mapbox.com/' target='_blank'>&copy; Mapbox</a>
+    <a href='https://www.rsd.cz' target='_blank'>&copy; ŘSD</a>
+    `
     createVectorTile = (title, url, style, zIndex, geometry, maxResolution, minResolution) => {
         let format;
         if (geometry) {
@@ -28,6 +33,7 @@ export default new class Layers {
             source: new VectorTileSource({
                 format,
                 url,
+                attributions: this.attributions
             }),
             maxResolution,
             minResolution,
@@ -43,14 +49,17 @@ export default new class Layers {
             new TileLayer({
                 id: "mapbox-dark",
                 source: new XYZ({
-                    url: "https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXRvbWFub24iLCJhIjoiY2o4dDYyOXFnMGl6MzJxcDAxcmpuenYxdCJ9.TBlWfbR9wNimqgd8uZcNVQ"
+                    url: "https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXRvbWFub24iLCJhIjoiY2o4dDYyOXFnMGl6MzJxcDAxcmpuenYxdCJ9.TBlWfbR9wNimqgd8uZcNVQ",
+                    attributions: this.attributions
                 }),
                 zIndex: 2,
                 show: true,
             }),
             new TileLayer({
                 id: "osm",
-                source: new OSM(),
+                source: new OSM({
+                    attributions: this.attributions
+                }),
                 zIndex: 1,
                 show: true,
             }),
@@ -122,7 +131,7 @@ export default new class Layers {
             }),
             new VectorLayer({
                 id: "grid",
-                source: new VectorSource({}),
+                source: new VectorSource({ attributions: this.attributions }),
                 style: null,
                 zIndex: 5,
                 show: true

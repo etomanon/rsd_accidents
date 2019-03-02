@@ -7,12 +7,18 @@ import Loader from "../components/loader";
 import MainMap from "./home/mainMap";
 import RightMenu from "./home/rightMenu";
 import ChartModal from "./home/charts/chartModal";
+import JoyRide from '../main/joyRide';
 
 class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.rightMenuRef = React.createRef();
+    }
     render() {
         return (
             <div>
-                <RightMenu />
+                {this.props.visited !== "true" && <JoyRide rightMenuRef={this.rightMenuRef} />}
+                <RightMenu ref={this.rightMenuRef} />
                 <MainMap
                     map={this.props.map}
                 />
@@ -37,4 +43,4 @@ const mapDispatchToProps = {
     modalToggle
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps, null, { forwardRef: true })(Home);

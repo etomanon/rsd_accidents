@@ -12,6 +12,10 @@
         color: $primary;
         border: 1px solid $primary;
     }
+    &--menu {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+    }
 }
 
 .button-big {
