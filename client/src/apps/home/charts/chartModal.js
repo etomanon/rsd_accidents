@@ -14,7 +14,7 @@ function getModalStyle() {
     top: `50%`,
     left: `50%`,
     transform: `translate(-50%, -50%)`,
-    width: 'auto',
+    width: '1080px',
     height: '90%',
     overflow: 'auto',
   };

@@ -100,6 +100,7 @@ export default class JoyRide extends React.Component {
             primaryColor: '#303F9F',
           }
         }}
+        // disableOverlay={true}
         spotlightPadding={0}
       />
     );

@@ -88,7 +88,7 @@ export default class Legend extends Component {
       </>
     );
   }
-  mainLegend = (name, title, start, end) => {
+  mainLegend = (name, title, hour) => {
     return (
       <div className="mb-20">
         <Button
@@ -106,13 +106,13 @@ export default class Legend extends Component {
               <span className="action">interval počtu nehod <i className="fas fa-info-circle"></i></span>
             </Tooltip>
             <span> | počet úseků v intervalu)</span>
-            </div>
+          </div>
           {this.props.legend
-            .filter((l, i) => i > start && i < end)
+            .filter((l, i) => l.table.includes(name))
             .map((legend, i) => {
-              return (this.props.hour === -1 && legend.hour === -1) ||
-                (this.props.hour !== -1 && legend.hour !== -1) ?
-                this.item(legend)
+              return ((hour === -1 && legend.hour === -1) ||
+                (hour !== -1 && legend.hour !== -1)) ?
+                this.item(legend, hour)
                 :
                 null
             })
@@ -122,13 +122,14 @@ export default class Legend extends Component {
     );
   }
   render() {
+    const { gridLegend, hour } = this.props;
     return (
       <div className="p-20 container-column">
         <div className="big mb-20">Legenda</div>
-        {this.mainLegend("weekend", "Víkend", 2, 6)}
-        {this.mainLegend("weekday", "Pracovní týden", -1, 3)}
+        {this.mainLegend("weekend", "Víkend", hour)}
+        {this.mainLegend("weekday", "Pracovní týden", hour)}
         {
-          this.props.gridLegend.ranges && <div className="mb-20">
+          gridLegend.ranges && <div className="mb-20">
             <Button
               variant="contained"
               color={`${this.state["grid"] ? "primary" : "default"}`}
@@ -139,14 +140,14 @@ export default class Legend extends Component {
           </Button>
             <Collapse in={this.state["grid"]}>
               <div className="mb-20 mt-20">
-              <Tooltip title={"Počet nehod celkem (víkend + pracovní týden)"} placement="left">
-              <span className="action">Počet nehod <i className="fas fa-info-circle"></i></span>
-            </Tooltip>
-            <span> (počet čtverců v intervalu)</span>
-            
-            </div>
+                <Tooltip title={"Počet nehod celkem (víkend + pracovní týden)"} placement="left">
+                  <span className="action">Počet nehod <i className="fas fa-info-circle"></i></span>
+                </Tooltip>
+                <span> (počet čtverců v intervalu)</span>
+
+              </div>
               {
-                this.gridItem(this.props.gridLegend)
+                this.gridItem(gridLegend)
               }
             </Collapse>
           </div>

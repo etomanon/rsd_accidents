@@ -112,9 +112,11 @@ class RightMenu extends Component {
                         this.items.map(item => this.button(item.name, item.title, item.icon))
                     }
                 </div>
+                <div className="right-menu__container">
                 {
                     this.items.map(item => this.submenu(item.name, item.comp))
                 }
+                </div>
             </div>
 
         );
