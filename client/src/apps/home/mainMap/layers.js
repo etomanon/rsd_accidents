@@ -175,7 +175,7 @@ export default new class Layers {
         Styles.updateStyle(stateMap, layersAll);
         let prevData = prevMap && prevMap.gridData;
         if (!isEqual(stateMap.gridData, prevData)) {
-            console.log(this.defaultLayers)
+            // console.log(this.defaultLayers)
             const gridLayer = this.defaultLayers.find(l => l.get("id") === "grid");
             const source = gridLayer.getSource();
             source.clear(true);

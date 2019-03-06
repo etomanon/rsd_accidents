@@ -15,7 +15,7 @@ services:
         image: rsd-server
         container_name: rsd-server
         build: ./server
-        restart: always
+        restart: on-failure
         env_file:
             - .env
         ports:
@@ -29,7 +29,7 @@ services:
             - client
     postgres:
         image: mdillon/postgis
-        restart: always
+        restart: on-failure
         container_name: postgres
         volumes:
             - ./postgres:/var/lib/postgresql/data

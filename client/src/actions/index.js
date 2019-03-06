@@ -9,6 +9,7 @@ export const LEGEND_GET = 'LEGEND_GET';
 export const CHART_GET = 'CHART_GET';
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';
 export const GRID_DATA = 'GRID_DATA';
+export const CRITICAL_TOGGLE = 'CRITICAL_TOGGLE';
 
 export function layerToggle(layerId) {
     return {
@@ -77,4 +78,10 @@ export function gridData(bbox) {
         type: GRID_DATA,
         payload: request
     }
+}
+
+export function criticalToggle() {
+    return {
+        type: CRITICAL_TOGGLE
+    };
 }
