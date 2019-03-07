@@ -15,17 +15,17 @@ export default function(
   state = {
     layers: [
       {
-        id: "osm",
-        name: "OSM",
-        opacity: 1,
-        show: false,
-        zIndex: 1
-      },
-      {
         id: "mapbox-dark",
         name: "Mapbox Dark",
         opacity: 1,
         show: true,
+        zIndex: 1
+      },
+      {
+        id: "osm",
+        name: "OSM",
+        opacity: 1,
+        show: false,
         zIndex: 2
       },
       {

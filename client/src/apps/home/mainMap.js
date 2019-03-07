@@ -10,6 +10,8 @@ import "ol/ol.css";
 import Layers from "./mainMap/layers";
 import Events from "./mainMap/events";
 
+import testLayer from './mainMap/testLayer';
+
 
 export default class MainMap extends Component {
   componentDidMount() {
@@ -24,19 +26,19 @@ export default class MainMap extends Component {
       target: this.map,
       view: new View({
         center: fromLonLat([16.6068, 49.1951]),
-        zoom: 15,
+        zoom: 13,
         projection: "EPSG:3857"
       })
     });
     Layers.defaultLayers(this.mapEl);
     Events.init(this.mapEl, this.props.map);
-
     Layers.update(this.mapEl, this.props.map);
     const updateMapSize = (entries, observer) => {
       this.mapEl.updateSize();
     }
     this.observer = new ResizeObserver(updateMapSize);
     this.observer.observe(this.map);
+    this.mapEl.addLayer(testLayer);
   }
   componentDidUpdate(prevProps) {
     Layers.update(this.mapEl, this.props.map, prevProps.map);

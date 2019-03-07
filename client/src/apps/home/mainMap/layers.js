@@ -52,7 +52,7 @@ export default new class Layers {
                     url: "https://api.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZXRvbWFub24iLCJhIjoiY2o4dDYyOXFnMGl6MzJxcDAxcmpuenYxdCJ9.TBlWfbR9wNimqgd8uZcNVQ",
                     attributions: this.attributions
                 }),
-                zIndex: 2,
+                zIndex: 1,
                 show: true,
             }),
             new TileLayer({
@@ -60,7 +60,7 @@ export default new class Layers {
                 source: new OSM({
                     attributions: this.attributions
                 }),
-                zIndex: 1,
+                zIndex: 2,
                 show: true,
             }),
             new LayerGroup({
@@ -93,7 +93,7 @@ export default new class Layers {
                         true,
                         undefined,
                         150,
-                    ),
+                    )
                 ]
             }),
             new LayerGroup({

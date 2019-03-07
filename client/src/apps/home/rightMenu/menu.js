@@ -73,7 +73,7 @@ export default class Menu extends Component {
             <Button
               id="critical"
               variant="contained"
-              color={`${this.props.critical ? "primary" : "default"}`}
+              color={`${this.props.critical ? "secondary" : "default"}`}
               onClick={e => {
                 this.props.criticalToggle();
               }}
